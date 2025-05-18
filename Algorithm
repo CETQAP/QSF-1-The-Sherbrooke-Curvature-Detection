@@ -1,0 +1,140 @@
+QSF-1 Algorithm: Patchwise Curvature Detection Using Quantum Entanglement
+Input:
+Number of qubits n = 3 (each qubit = 1 spacetime patch)
+
+Quantum backend (preferably ibm_sherbrooke, or fallback to AerSimulator)
+
+IBM Quantum API key (optional if running on real hardware)
+
+Output:
+Probability distribution of key states (000, 001, ..., 111)
+
+Entropy per patch (patch_1, patch_2, patch_3)
+
+Visual histogram of curvature signatures
+
+JSON-formatted results with timestamp
+
+Steps:
+1. Initialize System
+Define n = 3 qubits for representing spacetime patches.
+
+Create an empty quantum circuit qc of size n.
+
+2. Generate Superposition
+Apply H (Hadamard) gates on all 3 qubits:
+
+scss
+Copy
+Edit
+for i in range(3):
+    qc.h(i)
+This step represents the quantum foam's indeterminate base state.
+
+3. Entangle Patches
+Apply entangling CNOT gates:
+
+scss
+Copy
+Edit
+qc.cx(0, 1)
+qc.cx(1, 2)
+qc.cx(2, 0)
+This models topological interdependence of foam patches.
+
+4. Introduce Patchwise Curvature
+Apply Ry(θ) rotations to simulate curvature in each patch:
+
+bash
+Copy
+Edit
+qc.ry(π/3, 0)       # Patch 1
+qc.ry(1.3694, 1)    # Patch 2
+qc.ry(1.2661, 2)    # Patch 3
+These amplitudes induce localized deformation.
+
+5. Final Entanglement Layer
+Add more CNOTs to entangle curvature effects:
+
+scss
+Copy
+Edit
+qc.cx(1, 0)
+qc.cx(2, 1)
+6. Copy and Measure
+Copy the circuit and apply measure_all() to prepare for execution:
+
+go
+Copy
+Edit
+qc_measured = qc.copy()
+qc_measured.measure_all()
+Execution Phase:
+7. Backend Selection
+Check if "ibm_sherbrooke" is available from IBM Quantum.
+
+Else, use local AerSimulator.
+
+8. Transpile Circuit
+Transpile for optimal execution on the selected backend.
+
+9. Run Experiment
+Execute the circuit with shots=1000 using SamplerV2.
+
+10. Collect Results
+Extract raw measurement counts and normalize to probabilities:
+
+perl
+Copy
+Edit
+probability[state] = count[state] / total_shots
+Postprocessing Phase:
+11. Calculate Entanglement Entropy
+For each patch/qubit, calculate:
+
+ini
+Copy
+Edit
+entropy_patch_i = entropy(Statevector(qc), [i])
+12. Interpret Results
+Map key bitstrings to physical descriptions:
+
+python
+Copy
+Edit
+'000': all flat
+'001': patch 3 curved
+'010': patch 2 curved
+'100': patch 1 curved
+'111': all curved
+13. Save Outputs
+Create a JSON file with:
+
+probabilities of each state
+
+entropy values
+
+timestamp
+
+Save a histogram as results.png
+
+14. Print Summary
+Display:
+
+State ↔ Description ↔ Probability
+
+Patchwise entropy in bits
+
+ASCII circuit diagram
+
+✅ Detection Condition
+If:
+
+python
+Copy
+Edit
+probability["100"] > 0.90
+Then:
+
+✅ Patch 1 Curved Detected — Signature of localized deformation in simulated quantum spacetime foam.
+
